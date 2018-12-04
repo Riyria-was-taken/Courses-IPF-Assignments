@@ -233,10 +233,12 @@ let get_interval x tre =
 (*  plus all elements of the interval [[x,y]] including [x] and [y]. *)
 (*  Assumes [x <= y].                                                *)
 let add (x, y) tre = 
-    let (bf, _) = if mem (minus x 1) tre then get_interval (minus x 1) tre
-					else get_interval x tre
-    and (_, es) = if mem (plus y 1) tre then get_interval (plus y 1) tre 
-					else get_interval y tre in
+    let (bf, _) = 
+        if mem (minus x 1) tre then get_interval (minus x 1) tre
+        else get_interval x tre
+    and (_, es) = 
+        if mem (plus y 1) tre then get_interval (plus y 1) tre 
+        else get_interval y tre in
     let (lower, _, helper) = split bf tre in
     let (_, _, higher) = split es helper in
     join lower (bf, es) higher
@@ -257,4 +259,4 @@ let remove (x, y) tre =
 let below x tre =
     if x = max_int then size tre
     else let (lower, _, _) = split (x + 1) tre in size lower
-	
+    
