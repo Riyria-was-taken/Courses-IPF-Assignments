@@ -19,7 +19,7 @@ let empty = Null
 (* Selektor, ktory sprawdza czy kolejka jest pusta. *)
 let is_empty que =
     match que with
-    | Null -> true
+    | Null -> truea
     | _ -> false
 
 (* Funkcja pomocnicza, ktora zwraca dlugosc najbardziej prawej sciezki. *)
