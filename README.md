@@ -6,4 +6,4 @@ the corectness of our code. Then our solution is checked by the other coursant, 
 or non-optimal or ugly implementation. So we do for another person.
 
 In the nearest future I'm going to translate my solutions into English, add task descriptions and develop this repository.
-Soo stay tuned ^~^.
+Soo stay tuned ^~^
