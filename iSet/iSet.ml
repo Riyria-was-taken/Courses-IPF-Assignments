@@ -73,7 +73,7 @@ let size tre =
 (* Constructs a Node.                          *)
 (* Expects correct left and right subtrees.    *)
 let make l (b, e) r = 
-    let tree_size = plus (plus (size l) (size r)) (minus (plus e 1) b)
+    let tree_size = plus (plus (size l) (size r)) (plus 1 (minus e b))
     and tree_height = max (height l) (height r) + 1
     in Node(l, (b, e), tree_size, r, tree_height)
 
@@ -115,7 +115,7 @@ let rec min_elt = function
  let rec remove_min_elt = function
   | Node (Empty, _, _, r, _) -> r
   | Node (l, k, _, r, _) -> bal (remove_min_elt l) k r
-  | Empty -> invalid_arg "PSet.remove_min_elt"
+  | Empty -> invalid_arg "ISet.remove_min_elt"
 
 (* Merges two AVL trees, where the diffrence   *)
 (* between the heights is below 4.             *)
@@ -233,9 +233,10 @@ let get_interval x tre =
 (*  plus all elements of the interval [[x,y]] including [x] and [y]. *)
 (*  Assumes [x <= y].                                                *)
 let add (x, y) tre = 
-    let (bf, _) = if mem (minus x 1) tre then get_interval (minus x 1) tre else get_interval x tre
-    and (_, es) = if mem (plus y 1) tre then get_interval (plus y 1) tre else get_interval y tre
-    in
+    let (bf, _) = if mem (minus x 1) tre then get_interval (minus x 1) tre
+					else get_interval x tre
+    and (_, es) = if mem (plus y 1) tre then get_interval (plus y 1) tre 
+					else get_interval y tre in
     let (lower, _, helper) = split bf tre in
     let (_, _, higher) = split es helper in
     join lower (bf, es) higher
@@ -256,3 +257,4 @@ let remove (x, y) tre =
 let below x tre =
     if x = max_int then size tre
     else let (lower, _, _) = split (x + 1) tre in size lower
+	
