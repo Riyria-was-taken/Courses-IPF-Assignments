@@ -117,15 +117,6 @@ let rec min_elt = function
   | Node (l, k, _, r, _) -> bal (remove_min_elt l) k r
   | Empty -> invalid_arg "ISet.remove_min_elt"
 
-(* Merges two AVL trees, where the diffrence   *)
-(* between the heights is below 4.             *)
-let merge t1 t2 =
-  match t1, t2 with
-  | Empty, t | t, Empty -> t
-  | _ ->
-      let k = min_elt t2 in
-      bal t1 k (remove_min_elt t2)
-
 (* Checkes if x is in the interval (b, e).     *)
 let if_in x (b, e) = 
     if (b <= x) && (x <= e) then 0
